@@ -1,5 +1,6 @@
 import sys
 import time
+
 import serial
 
 LED_COMMAND = "led"

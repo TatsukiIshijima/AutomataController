@@ -1,6 +1,7 @@
-import RPi.GPIO as GPIO
 import time
 from enum import Enum
+
+import RPi.GPIO as GPIO
 
 
 class Color(Enum):

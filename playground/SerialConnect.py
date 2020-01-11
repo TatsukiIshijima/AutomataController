@@ -1,5 +1,6 @@
 import sys
 import time
+
 import serial
 
 if __name__ == '__main__':
