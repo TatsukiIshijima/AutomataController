@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, Response
+
+from Camera import Camera
 
 app = Flask(__name__)
 
@@ -22,6 +24,19 @@ def home():
 		elif request.form.get('Stop') == 'Stop':
 			print('Stop')
 	return render_template('home.html')
+
+
+@app.route('/stream')
+def stream():
+	return Response(generate(Camera()),
+	                mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+def generate(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+	           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
 '''
