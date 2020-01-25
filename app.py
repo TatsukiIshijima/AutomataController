@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, Response
 
-from Camera import Camera
+from CameraPi import CameraPi
 
 app = Flask(__name__)
 
@@ -10,6 +10,7 @@ def form():
 	return redirect(url_for('home'))
 
 
+# Fix:POST等で更新するとストリームが落ちる
 @app.route('/home', methods=['GET', 'POST'])
 def home():
 	if request.method == 'POST':
@@ -28,7 +29,7 @@ def home():
 
 @app.route('/stream')
 def stream():
-	return Response(generate(Camera()),
+	return Response(generate(CameraPi()),
 	                mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
