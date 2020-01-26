@@ -19,5 +19,6 @@ class CameraPi(BaseCamera):
 
 			for frame in camera.capture_continuous(rawCapture, 'bgr', use_video_port=True):
 				image = frame.array
+				image = cv2.flip(image, 0)
 				yield cv2.imencode('.jpg', image)[1].tobytes()
 				rawCapture.truncate(0)
