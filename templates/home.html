@@ -20,7 +20,9 @@
 
     <main role="main" class="container">
       <div class="jumbotron">
-        <img src="{{ url_for('stream') }}">
+        <div class="row mb-5">
+          <img src="{{ url_for('stream') }}" class="rounded mx-auto d-block">
+        </div>
         <form method="post" action="home">
           <div class="form-group row justify-content-center">
             <div>
