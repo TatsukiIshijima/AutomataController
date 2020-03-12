@@ -15,6 +15,7 @@ class PiClient:
 
 	def __init__(self):
 		self._ser = serial.Serial()
+		self._ser.port = '/dev/serial0'
 		self._ser.baudrate = 9600
 		self._ser.timeout = 1
 		self._ser.write_timeout = 1
@@ -23,11 +24,10 @@ class PiClient:
 		if len(self._devices) != 1:
 			print('error : device not found.')
 			sys.exit()
-		print("device found %s" % self._devices[0])
-		self._ser.port = self._devices[0]
+		print('device found %s' % self._devices[0])
 		try:
 			self._ser.open()
-			time.sleep(2)
+			time.sleep(1)
 		except:
 			print('error : can not open serial.')
 			sys.exit()
