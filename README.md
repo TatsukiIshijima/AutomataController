@@ -2,11 +2,21 @@
 
 ### 構成
 - RaspberryPi zero wh
-- Arduino Pro mini
+- Arduino Pro mini（5V）
 - LittleBits R2D2
 - Pi Camera モジュール
 
+### 追加使用部品
+| 名前 | 用途 | リンク |
+| -- | -- | -- |
+| littleBits 電子工作 モジュール BITS MODULES W9 PROTO MODULE プロト | 電源延長 | https://littlebits.com/products/proto |
+| 電池ボックス | モーター用電源 | http://akizukidenshi.com/catalog/g/gP-00311/ |
+| レベル変換モジュール | 電圧変換 | https://www.switch-science.com/catalog/1523/ |
+| モータドライバ | DCモータ制御 | https://www.switch-science.com/catalog/3587/ |
+
 ### 開発環境
+- Raspbian GNU/Linux 9.11 (stretch)
+- Linux raspberrypi-zero 4.19.66+ #1253 Thu Aug 15 11:37:30 BST 2019 armv6l GNU/Linux
 - ~~Python 3.5.9（pyenv virtualenv 使用~~
 - Python 3.5.3 (Raspbeery Pi Default)
 
