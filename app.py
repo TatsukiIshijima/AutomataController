@@ -30,16 +30,20 @@ def home():
 	return render_template('home.html')
 
 
-@app.route('/home/led', methods=['POST'])
-def led():
+def _execute(func):
 	response = {
 		'result': False,
 		'message': ''
 	}
 	if request.method == 'POST':
-		pi_client.launch_led()
+		func
 		response['result'] = True
 	return jsonify(response)
+
+
+@app.route('/home/led', methods=['POST'])
+def led():
+	_execute(pi_client.launch_led())
 
 
 @app.route('/home/forward', methods=['POST'])
