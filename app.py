@@ -1,6 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, Response
-
-from CameraPi import CameraPi
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 
 app = Flask(__name__)
 
@@ -15,7 +13,7 @@ def form():
 def home():
 	if request.method == 'POST':
 		if request.form.get('Forward') == 'Forward':
-			print('Forward')
+			forward()
 		elif request.form.get('Backward') == 'Backward':
 			print('Backward')
 		elif request.form.get('Left') == 'Left':
@@ -27,6 +25,18 @@ def home():
 	return render_template('home.html')
 
 
+@app.route('/home/forward', methods=['POST'])
+def forward():
+	response = {
+		'result': False,
+		'message': ''
+	}
+	if request.method == 'POST':
+		response['result'] = True
+	return jsonify(response)
+
+
+'''
 @app.route('/stream')
 def stream():
 	return Response(generate(CameraPi()),
@@ -40,7 +50,6 @@ def generate(camera):
 	           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-'''
 def __update_drive_error(response):
 	if response is not None:
 		flash(f'{response.message}')
