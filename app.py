@@ -1,8 +1,9 @@
 import signal
 import sys
 
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, Response
 
+from CameraPi import CameraPi
 from PiClient import PiClient
 
 app = Flask(__name__)
@@ -78,7 +79,6 @@ def handler(signal, frame):
 	sys.exit()
 
 
-'''
 @app.route('/stream')
 def stream():
 	return Response(generate(CameraPi()),
@@ -91,7 +91,7 @@ def generate(camera):
 		yield (b'--frame\r\n'
 	           b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-
+'''
 def __update_drive_error(response):
 	if response is not None:
 		flash(f'{response.message}')
