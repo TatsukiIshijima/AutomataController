@@ -18,15 +18,15 @@ def form():
 def home():
 	if request.method == 'POST':
 		if request.form.get('Forward') == 'Forward':
-			led()
+			forward()
 		elif request.form.get('Backward') == 'Backward':
-			print('Backward')
+			backward()
 		elif request.form.get('Left') == 'Left':
-			print('Lef')
+			turn_left()
 		elif request.form.get('Right') == 'Right':
-			print('Right')
+			turn_right()
 		elif request.form.get('Stop') == 'Stop':
-			print('Stop')
+			stop()
 	return render_template('home.html')
 
 
@@ -48,13 +48,28 @@ def led():
 
 @app.route('/home/forward', methods=['POST'])
 def forward():
-	response = {
-		'result': False,
-		'message': ''
-	}
-	if request.method == 'POST':
-		response['result'] = True
-	return jsonify(response)
+	_execute(pi_client.accelerate(60))
+
+
+@app.route('/home/backward', methods=['POST'])
+def backward():
+	_execute(pi_client.accelerate(60, False))
+
+
+@app.route('/home/turn_left', methods=['POST'])
+def turn_left():
+	_execute(pi_client.turn(45))
+
+
+@app.route('/home/turn_right', methods=['POST'])
+def turn_right():
+	_execute(pi_client.turn(125))
+
+
+@app.route('/home/stop', methods=['POST'])
+def stop():
+	_execute(pi_client.accelerate(0))
+	_execute(pi_client.turn(90))
 
 
 def handler(signal, frame):
