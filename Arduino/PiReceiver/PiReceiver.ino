@@ -112,11 +112,11 @@ void startMotor(bool isForward, int speedValue) {
     return;
   }
   if (isForward) {
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
-  } else {
     digitalWrite(AIN1, LOW);
     digitalWrite(AIN2, HIGH);
+  } else {
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, LOW);
   }
   analogWrite(PWMA, speedValue);
 }
