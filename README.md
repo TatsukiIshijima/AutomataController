@@ -50,6 +50,11 @@ Tensorflow のみは以下
 sudo python3 app.py
 ```
 
+### デモ
+<div align=center>
+<img src="screenshot/demo.gif" width="270">　<img src="screenshot/demo_web.gif" width="360">
+</div>
+
 ### 備考
 - Raspberry Pi と Arduino の連携では Raspberry Pi 側のシリアルポートを解放する必要あり（参考：レシピ 9.23）
 - Raspberry Pi のアップデートをすると以前のポート解放の設定が解除されている可能性あり
