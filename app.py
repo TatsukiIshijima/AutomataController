@@ -1,3 +1,4 @@
+import json
 import signal
 import sys
 
@@ -39,7 +40,7 @@ def _execute(func):
 	if request.method == 'POST':
 		func
 		response['result'] = True
-	return jsonify(response)
+	return jsonify(json.dumps(response))
 
 
 @app.route('/home/led', methods=['POST'])
@@ -59,18 +60,18 @@ def backward():
 
 @app.route('/home/turn_left', methods=['POST'])
 def turn_left():
-	_execute(pi_client.turn(45))
+	_execute(pi_client.turn(60))
 
 
 @app.route('/home/turn_right', methods=['POST'])
 def turn_right():
-	_execute(pi_client.turn(125))
+	_execute(pi_client.turn(90))
 
 
 @app.route('/home/stop', methods=['POST'])
 def stop():
 	_execute(pi_client.accelerate(0))
-	_execute(pi_client.turn(90))
+	_execute(pi_client.turn(75))
 
 
 def handler(signal, frame):
