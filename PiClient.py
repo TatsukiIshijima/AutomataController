@@ -1,7 +1,6 @@
+import serial
 import sys
 import time
-
-import serial
 from serial.tools import list_ports
 
 LED_COMMAND = "led"
@@ -32,28 +31,28 @@ class PiClient:
 			print('error : can not open serial.')
 			sys.exit()
 
-	def _write(self, command_str):
+	def write(self, command_str):
 		if self._ser.is_open:
 			self._ser.write(command_str.encode('utf-8'))
 
 	def launch_led(self):
-		self._write(LED_COMMAND + ';')
+		self.write(LED_COMMAND + ';')
 
 	def accelerate(self, power, is_forward=True):
 		if power < 0 or power > 255:
 			return
 		elif power == 0:
-			self._write(STOP_MOTOR_COMMAND + ';')
+			self.write(STOP_MOTOR_COMMAND + ';')
 		else:
 			if is_forward:
-				self._write(FORWARD_MOTOR_COMMAND + str(power) + ';')
+				self.write(FORWARD_MOTOR_COMMAND + str(power) + ';')
 			else:
-				self._write(BACKWARD_MOTOR_COMMAND + str(power) + ';')
+				self.write(BACKWARD_MOTOR_COMMAND + str(power) + ';')
 
 	def turn(self, direction):
 		if direction < 0 or direction > 180:
 			return
-		self._write(DIRECTION_SERVO_COMMAND + str(direction) + ';')
+		self.write(DIRECTION_SERVO_COMMAND + str(direction) + ';')
 
 	def close(self):
 		self._ser.close()
